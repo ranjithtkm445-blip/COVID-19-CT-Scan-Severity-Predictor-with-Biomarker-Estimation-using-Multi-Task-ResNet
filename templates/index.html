@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COVID Severity AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">COVID Severity AI Pipeline</div>
+    <h1>Multi-Task <span>CT Analysis</span></h1>
+    <p class="sub">Select a CT scan from the upload folder and click Analyze</p>
+  </header>
+
+  <div class="main-grid">
+
+    <!-- Left Panel -->
+    <div class="left-panel">
+
+      <!-- Folder Info -->
+      <div class="folder-panel">
+        <div class="folder-header">
+          <div class="folder-icon">&#128193;</div>
+          <div>
+            <div class="folder-title">Upload Folder</div>
+            <div class="folder-path">D:/COVID/upload/</div>
+          </div>
+        </div>
+        <p class="folder-label">
+          Drop <strong>.nii</strong> files into the upload folder,
+          then select from the dropdown below.
+        </p>
+      </div>
+
+      <!-- File Dropdown -->
+      <div class="field">
+        <label for="fileSelect">Select CT Scan</label>
+        <select id="fileSelect" class="file-select">
+          <option value="">-- Loading files... --</option>
+        </select>
+        <p class="field-hint">.nii files from D:/COVID/upload/</p>
+      </div>
+
+      <!-- Buttons -->
+      <button class="btn-refresh" onclick="loadFiles()">
+        &#8635; Refresh List
+      </button>
+      <button class="btn-analyze" id="analyzeBtn" disabled onclick="analyze()">
+        Analyze CT Scan
+      </button>
+
+    </div>
+
+    <!-- Right Panel -->
+    <div class="right-panel">
+
+      <!-- Placeholder -->
+      <div class="placeholder" id="placeholder">
+        <div class="placeholder-icon">&#129485;</div>
+        <p>Select a CT scan and click Analyze to begin</p>
+      </div>
+
+      <!-- Loading -->
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Processing CT scan and generating GradCAM...</p>
+      </div>
+
+      <!-- Results -->
+      <div class="results" id="results">
+
+        <!-- Images -->
+        <div class="images-row">
+          <div class="img-card">
+            <img id="ctImg" src="" alt="CT Slice"/>
+            <div class="img-label">Original CT Slice</div>
+          </div>
+          <div class="img-card cam-card">
+            <img id="camImg" src="" alt="GradCAM"/>
+            <div class="img-label accent">GradCAM Heatmap</div>
+          </div>
+        </div>
+
+        <!-- Severity + Biomarkers -->
+        <div class="results-grid">
+
+          <div class="card">
+            <div class="card-title">Severity Prediction</div>
+            <div class="sev-val" id="sevVal">--</div>
+            <div class="sev-lbl" id="sevLbl">--</div>
+            <div id="confBars"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Predicted Biomarkers</div>
+            <div class="bm-grid" id="bmGrid"></div>
+          </div>
+
+        </div>
+
+        <!-- PDF Download -->
+        <a id="pdfLink" class="btn-download" href="#" download>
+          &#11015; Download PDF Report
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
