@@ -21,6 +21,16 @@ This project builds a multi-task AI system that takes a lung CT scan (.nii forma
 
 The model uses a ResNet18 backbone with a shared feature layer that branches into two output heads. GradCAM highlights the lung regions that influenced the prediction. A PDF report is automatically generated with the CT slice, heatmap, severity prediction, and biomarker values.
 
+## Dataset
+
+**Dataset Name:** MosMedData: Chest CT Scans with COVID-19 Related Findings
+**Source:** [Kaggle](https://www.kaggle.com/datasets/andrewmvd/mosmed-covid19-ct-scans)
+**Official Source:** [mosmed.ai](https://mosmed.ai/en/)
+**Format:** .nii (3D volumetric CT scans)
+**Total scans used:** 50 (10 per severity class)
+**Original dataset:** 1110 CT scans
+**Severity labels:** CT-0 to CT-4 based on lung involvement percentage
+
 ---
 
 ## Pipeline
