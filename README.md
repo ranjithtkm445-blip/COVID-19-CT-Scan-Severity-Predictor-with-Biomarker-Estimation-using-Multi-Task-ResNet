@@ -1,6 +1,4 @@
-Here is your **fully updated layman-friendly README**, rewritten cleanly while keeping all important details, but making it easy for anyone to understand.
 
----
 
 # COVID-19 Severity Detection using CT Scans and AI
 
